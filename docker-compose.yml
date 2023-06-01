@@ -1,0 +1,54 @@
+services:
+  reservations:
+    build:
+      context: .
+      dockerfile: ./apps/reservations/DockerFile
+      target: development
+    command: npm run start:dev reservations
+    env_file:
+      - ./apps/reservations/.env
+    ports:
+      - '7050:7050'
+    volumes:
+      - .:/usr/src/app
+  auth:
+    build:
+      context: .
+      dockerfile: ./apps/auth/DockerFile
+      target: development
+    command: npm run start:dev auth
+    env_file:
+      - ./apps/auth/.env
+    ports:
+      - '7060:7060'
+    volumes:
+      - .:/usr/src/app
+
+  payments:
+    build:
+      context: .
+      dockerfile: ./apps/payments/DockerFile
+      target: development
+    command: npm run start:dev payments
+    env_file:
+      - ./apps/payments/.env
+    ports:
+      - '7070:7070'
+    volumes:
+      - .:/usr/src/app
+
+  notifications:
+    build:
+      context: .
+      dockerfile: ./apps/notifications/DockerFile
+      target: development
+    command: npm run start:dev notifications
+    env_file:
+      - ./apps/notifications/.env
+    ports:
+      - '7080:7080'
+    volumes:
+      - .:/usr/src/app
+
+  mongo:
+    image: mongo
